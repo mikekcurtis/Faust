@@ -1,0 +1,8 @@
+
+// make gain, set gain to 0.5 so we don't blow ourselves out
+// this is infix notation, making the circuits in parallel
+// then connecting them to a multiplier
+
+import("stdfaust.lib");
+gain = hslider("gain",0.5,0,1,0.1);
+process = gain, os.sawtooth(440): * ;
