@@ -1,5 +1,5 @@
-declare author "Michael Curtis"
-declare name "depth"
+declare author "Michael Curtis";
+declare name "depth";
 
 // (ma.SR/1000)+((ma.SR/1000)*(slider))-(.ma.SR/1000)
 // make variable that's ma.SR/1000, time?
