@@ -2,20 +2,22 @@ declare author "Michael Curtis";
 declare name "depth";
 
 // (ma.SR/1000)+((ma.SR/1000)*(slider))-(.ma.SR/1000)
-// make variable that's ma.SR/1000, time?
 // scale frequency sliders to log
-// this is a change, I can do it from here
 
 import("stdfaust.lib");
 
-depth(x) = x : fltrs : dly : trim
+depth(x) = x : filtersection : delay : trim
   with{
-    fltrs = fi.highpass(2,hpfreq) : fi.lowpass(2,lpfreq);
+
+    filtersection = fi.highpass(2,hpfreq) : fi.lowpass(2,lpfreq);
+
       hpfreq = hslider("[0]bottom",200,20,1000,10) : si.smoo;
       lpfreq = hslider("[1]top",2000,200,20000,10) : si.smoo;
 
-    dly(x) = x, (ma.SR/1000) * sprtn : @;
-      sprtn = hslider("[2]separation",1,1,10,1);
+    delay(x) = x, milliseconds * separation : @;
+
+      milliseconds = (ma.SR/1000);
+      separation = hslider("[2]separation",1,1,10,1);
 
     trim(x) = x, .707: *;
   };
