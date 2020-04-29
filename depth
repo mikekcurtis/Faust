@@ -4,6 +4,7 @@ declare name "depth";
 // (ma.SR/1000)+((ma.SR/1000)*(slider))-(.ma.SR/1000)
 // make variable that's ma.SR/1000, time?
 // scale frequency sliders to log
+// this is a change, I can do it from here
 
 import("stdfaust.lib");
 
