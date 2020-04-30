@@ -3,6 +3,7 @@ declare name "depth";
 
 // (ma.SR/1000)+((ma.SR/1000)*(slider))-(.ma.SR/1000)
 // scale frequency sliders to log
+// duplicate of signal in addition to original delay that's 6dB down, but a multiple of the delay time?
 
 import("stdfaust.lib");
 
