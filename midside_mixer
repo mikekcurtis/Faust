@@ -13,9 +13,9 @@ midside_mixer = stereo_to_ms : ms_volume_controls : ms_to_stereo
 
     side_volume = vslider("Side[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
 
-      ms_volume_controls(m,s) = m * mid_volume, s * side_volume;
-
       stereo_to_ms(l,r) = (l+r)/2, (l-r)/2;
+
+      ms_volume_controls(m,s) = m * mid_volume, s * side_volume;
 
       ms_to_stereo(m,s) = (m+s), (m-s);
 
