@@ -1,0 +1,15 @@
+declare name "midside mixer";
+declare author "Michael Curtis";
+
+import("stdfaust.lib");
+
+midside_mixer = stereo_to_ms : ms_to_stereo
+
+  with{
+
+    stereo_to_ms(l,r) = (l+r)/2, (l-r)/2;
+
+    ms_to_stereo(m,s) = (m+s)/2, (m-s)/2;
+  };
+
+process = midside_mixer;
