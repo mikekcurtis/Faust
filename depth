@@ -2,7 +2,6 @@ declare author "Michael Curtis";
 declare name "depth";
 
 // (ma.SR/1000)+((ma.SR/1000)*(slider))-(.ma.SR/1000)
-// scale frequency sliders to log
 // duplicate of signal in addition to original delay that's 6dB down, but a multiple of the delay time?
 
 import("stdfaust.lib");
@@ -12,8 +11,8 @@ depth(x) = x : filtersection : delay : trim
 
     filtersection = fi.highpass(2,hpfreq) : fi.lowpass(2,lpfreq);
 
-      hpfreq = hslider("[0]bottom",200,20,1000,10) : si.smoo;
-      lpfreq = hslider("[1]top",2000,200,20000,10) : si.smoo;
+      hpfreq = hslider("[0]bottom[scale:log]",200,20,1000,10) : si.smoo;
+      lpfreq = hslider("[1]top[scale:log]",2000,200,20000,10) : si.smoo;
 
     delay(x) = x, milliseconds * separation : @;
 
