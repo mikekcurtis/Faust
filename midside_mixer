@@ -5,26 +5,29 @@ declare author "Michael Curtis";
 
 import("stdfaust.lib");
 
-midside_mixer = stereo_to_ms : ms_volume_controls : ms_to_stereo
+midside_mixer = stereo_to_ms : ms_faders : ms_blend : ms_to_stereo;
 
-  with{
 
-    mid_volume =  hslider("Mid[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
+  stereo_to_ms(l,r) = (l+r)/2, (l-r)/2;
 
-    side_volume = hslider("Side[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
+  ms_faders(m,s) = m * mid_fader, s * side_fader
 
-      stereo_to_ms(l,r) = (l+r)/2, (l-r)/2;
-      
-      ms_to_stereo(m,s) = (m+s), (m-s);
+    with{
 
-      ms_volume_controls(m,s) = m * mid_volume, s * side_volume : ms_blend;
+      mid_fader =  hslider("Mid[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
 
-        ms_blend = (min(1 - blend, 1)), (min(1 + blend, min))
+      side_fader = hslider("Side[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
 
-            with {
-                blend = nentry("MS Blend[style:knob]",0,-1,1,.1) : si.smoo;
-            };
+        };
 
-  };
+  ms_blend(m,s) = m * (min(1 - blend, 1)), s * (min(1 + blend, 1))
+
+    with{
+
+      blend = nentry("MS Blend[style:knob]",0,-1,1,.1) : si.smoo;
+
+        };
+
+  ms_to_stereo(m,s) = (m+s), (m-s);
 
 process = midside_mixer;
