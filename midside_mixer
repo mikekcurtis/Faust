@@ -19,11 +19,11 @@ midside_mixer = stereo_to_ms : ms_levels : ms_blend : ms_to_stereo;
 
         };
 
-  ms_blend(m,s) = m * (min(1 - blend, 1)), s * (min(1 + blend, 1))
+  ms_blend(m,s) = m * (min(1 - blend_factor, 1)), s * (min(1 + blend_factor, 1))
 
     with{
 
-      blend = nentry("[3]MS Blend[style:knob]",0,-1,1,.1) : si.smoo;
+      blend_factor = nentry("[3]MS Blend[style:knob]",0,-1,1,.1) : si.smoo;
 
         };
 
