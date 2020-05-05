@@ -5,20 +5,28 @@ declare author "Michael Curtis";
 
 import("stdfaust.lib");
 
-midside_mixer = stereo_to_ms : ms_volume_controls : ms_to_stereo
+midside_mixer = stereo_to_ms : ms_levels : ms_blend : ms_to_stereo;
 
-  with{
+  stereo_to_ms(l,r) = (l+r)/2, (l-r)/2;
 
-    mid_volume =  vslider("Mid[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
+  ms_levels(m,s) = m * mid_level, s * side_level
 
-    side_volume = vslider("Side[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
+    with{
 
-      stereo_to_ms(l,r) = (l+r)/2, (l-r)/2;
+      mid_level =  hslider("[1]Mid Level[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
 
-      ms_volume_controls(m,s) = m * mid_volume, s * side_volume;
+      side_level = hslider("[2]Side Level[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
 
-      ms_to_stereo(m,s) = (m+s), (m-s);
+        };
 
-  };
+  ms_blend(m,s) = m * (min(1 - blend_factor, 1)), s * (min(1 + blend_factor, 1))
+
+    with{
+
+      blend_factor = nentry("[3]MS Blend[style:knob]",0,-1,1,.1) : si.smoo;
+
+        };
+
+  ms_to_stereo(m,s) = (m+s), (m-s);
 
 process = midside_mixer;
