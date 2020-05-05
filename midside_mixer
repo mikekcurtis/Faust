@@ -7,7 +7,6 @@ import("stdfaust.lib");
 
 midside_mixer = stereo_to_ms : ms_faders : ms_blend : ms_to_stereo;
 
-
   stereo_to_ms(l,r) = (l+r)/2, (l-r)/2;
 
   ms_faders(m,s) = m * mid_fader, s * side_fader
