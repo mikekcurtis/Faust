@@ -5,17 +5,17 @@ declare author "Michael Curtis";
 
 import("stdfaust.lib");
 
-midside_mixer = stereo_to_ms : ms_faders : ms_blend : ms_to_stereo;
+midside_mixer = stereo_to_ms : ms_levels : ms_blend : ms_to_stereo;
 
   stereo_to_ms(l,r) = (l+r)/2, (l-r)/2;
 
-  ms_faders(m,s) = m * mid_fader, s * side_fader
+  ms_levels(m,s) = m * mid_level, s * side_level
 
     with{
 
-      mid_fader =  hslider("Mid[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
+      mid_level =  hslider("[1]Mid Level[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
 
-      side_fader = hslider("Side[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
+      side_level = hslider("[2]Side Level[unit:db]",0,-12,12,0.5) : ba.db2linear : si.smoo;
 
         };
 
@@ -23,7 +23,7 @@ midside_mixer = stereo_to_ms : ms_faders : ms_blend : ms_to_stereo;
 
     with{
 
-      blend = nentry("MS Blend[style:knob]",0,-1,1,.1) : si.smoo;
+      blend = nentry("[3]MS Blend[style:knob]",0,-1,1,.1) : si.smoo;
 
         };
 
