@@ -3,6 +3,8 @@ declare name "depth";
 
 // (ma.SR/1000)+((ma.SR/1000)*(slider))-(.ma.SR/1000)
 // duplicate of signal in addition to original delay that's 6dB down, but a multiple of the delay time?
+// chorus button named “movement”; output trim. Invert polarity button?
+// rename plugin to "ditto, mirror, twin," - for panning
 
 import("stdfaust.lib");
 
