@@ -5,6 +5,7 @@ declare name "depth";
 // duplicate of signal in addition to original delay that's 6dB down, but a multiple of the delay time?
 // chorus button named “movement”; output trim. Invert polarity button?
 // rename plugin to "ditto, mirror, twin," - for panning
+// LFO that modulates percentage of "separation"; evolving relationship?
 
 import("stdfaust.lib");
 
