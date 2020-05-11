@@ -6,6 +6,7 @@ declare name "depth";
 // chorus button named “movement”; output trim. Invert polarity button?
 // rename plugin to "ditto, mirror, twin," - for panning
 // LFO that modulates percentage of "separation"; evolving relationship?
+// make naming conventions more clear, like midside mixer plugin
 
 import("stdfaust.lib");
 
